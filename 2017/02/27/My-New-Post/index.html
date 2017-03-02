@@ -256,7 +256,7 @@
   
     <div class="site-search">
       
-  <div class="popup local-search-popup">
+  <div class="popup search-popup local-search-popup">
   <div class="local-search-header clearfix">
     <span class="search-icon">
       <i class="fa fa-search"></i>
@@ -265,7 +265,9 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -603,7 +605,9 @@
     // monitor main search box;
 
     function proceedsearch() {
-      $("body").append('<div class="local-search-pop-overlay">').css('overflow', 'hidden');
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
       $('.popup').toggle();
     }
     // search function;
