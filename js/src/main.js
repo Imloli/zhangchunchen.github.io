@@ -1,4 +1,63 @@
-var b;
+require([], function (){
+
+    var isMobileInit = false;
+    var loadMobile = function(){
+        require([yiliaConfig.rootUrl + 'js/mobile.js'], function(mobile){
+            mobile.init();
+            isMobileInit = true;
+        })
+    }
+    var isPCInit = false;
+    var loadPC = function(){
+        require([yiliaConfig.rootUrl + 'js/pc.js'], function(pc){
+            pc.init();
+            isPCInit = true;
+        })
+    }
+
+    var browser = {
+        versions: function() {
+        var u = window.navigator.userAgent;
+        return {
+            trident: u.indexOf('Trident') > -1, //IE内核
+            presto: u.indexOf('Presto') > -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+            iPad: u.indexOf('iPad') > -1, //是否为iPad
+            webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
+            weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
+            };
+        }()
+    }
+    
+
+	$(function(){
+		btn = $('.set-view-mode');
+		if(sessionStorage.mode=="night"){
+			$('body').addClass('night-mode');
+    		btn.find('i').attr('class','fa fa-sun-o');
+		}
+		$('.set-view-mode').click(function(){
+			var next_mode = $('body').hasClass('night-mode') ? 'day' : 'night';		
+			if(next_mode!='day'){
+    			$('body').addClass('night-mode');
+    			btn.find('i').attr('class','fa fa-sun-o');
+    			sessionStorage.mode="night";   			
+    		}else{
+    			$('body').removeClass('night-mode');
+				btn.find('i').attr('class','fa fa-moon-o');
+				sessionStorage.mode="day";
+			}
+		});	
+		console.log("%cWelcome to shawn's blog!\n %cCopyright © %s",'font-family: "Courier", sans-serif;font-size:24px;color:black;',"font-size:12px;color:black;",(new Date).getFullYear());		
+  	});
+  	
+
+	var b;
     document.getElementsByClassName("xm")[0].addEventListener("click", function() {
            b || (b = new Audio("http://pictures.shawnzeng.com/loli.mp3")), b.play()
         });  
